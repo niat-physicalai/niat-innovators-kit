@@ -1,0 +1,91 @@
+NIAT Kit ESP32-S3 Pin Map
+================================================================================
+
+ONBOARD COMPONENTS:
+--------------------------------------------------------------------------------
+Component           Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+NeoPixel LED        GPIO48          board.NEOPIXEL      RGB status LED
+Boot Button         GPIO0           board.BOOT          Built-in button
+SD Card             SPI bus         -                   For data logging
+
+OLED DISPLAY (I2C):
+--------------------------------------------------------------------------------
+Signal              Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+SDA                 GPIO8           board.IO8           Data line
+SCL                 GPIO3           board.IO3           Clock line
+Address: 0x3C
+
+BASIC DEVELOPMENT BOARD:
+--------------------------------------------------------------------------------
+Component           Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+LED1                GPIO2           board.IO2           Red LED
+LED2                GPIO4           board.IO4           Green LED
+LED3                GPIO5           board.IO5           Blue LED
+LED4                GPIO6           board.IO6           Yellow LED
+Button SW1          GPIO7           board.IO7           Push button 1
+Button SW2          GPIO15          board.IO15          Push button 2
+Buzzer              GPIO46          board.IO46          Piezo buzzer
+Potentiometer       GPIO9           board.IO9           Analog input (ADC)
+
+SENSORS:
+--------------------------------------------------------------------------------
+Sensor              Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+Touch Sensor        GPIO10          board.IO10          Digital output
+Soil Moisture       GPIO11          board.IO11          Analog output (ADC)
+Rain Sensor AO      GPIO12          board.IO12          Analog output (ADC)
+Rain Sensor DO      GPIO13          board.IO13          Digital output
+MQ135 AO            GPIO14          board.IO14          Analog output (ADC)
+MQ135 DO            GPIO17          board.IO17          Digital output
+
+I2C SENSORS (Shared Bus with OLED):
+--------------------------------------------------------------------------------
+Sensor              Address         Notes
+--------------------------------------------------------------------------------
+SHT31               0x44            Temperature & Humidity
+VEML6030            0x48            Ambient Light
+
+MOTOR DRIVER (L298N):
+--------------------------------------------------------------------------------
+Signal              Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+ENA                 GPIO41          board.IO41          Motor A speed (PWM)
+IN1                 GPIO42          board.IO42          Motor A direction
+IN2                 GPIO43          board.IO43          Motor A direction
+ENB                 GPIO44          board.IO44          Motor B speed (PWM)
+IN3                 GPIO45          board.IO45          Motor B direction
+IN4                 GPIO38          board.IO38          Motor B direction
+
+RELAY MODULE:
+--------------------------------------------------------------------------------
+Channel             Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+Relay 1             GPIO16          board.IO16          Channel 1 control
+Relay 2             GPIO18          board.IO18          Channel 2 control
+
+LED MATRIX (8x8 WS2812B):
+--------------------------------------------------------------------------------
+Signal              Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+DIN                 GPIO21          board.IO21          NeoPixel data
+
+I2S MICROPHONE:
+--------------------------------------------------------------------------------
+Signal              Pin             Board Constant      Notes
+--------------------------------------------------------------------------------
+BCLK                GPIO39          board.IO39          Bit clock
+WS                  GPIO40          board.IO40          Word select
+DATA                GPIO47          board.IO47          Data input
+
+================================================================================
+I2C ADDRESS SUMMARY:
+================================================================================
+Device              Address         Description
+--------------------------------------------------------------------------------
+OLED SSD1306        0x3C            128x64 pixel display
+SHT31               0x44            Temperature & humidity sensor
+VEML6030            0x48            Ambient light sensor
+================================================================================

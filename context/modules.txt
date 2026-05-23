@@ -1,0 +1,172 @@
+
+NIAT Kit niat/ Library — Module Pattern
+================================================================================
+
+PATTERN TO FOLLOW FOR ALL NEW MODULES:
+--------------------------------------------------------------------------------
+1. Module docstring at top describing purpose
+2. Hardware imports at top (hidden from students)
+3. Import pin constants from niat._board
+4. Constants/lookup tables if needed (e.g., COLORS dict)
+5. Single class named after physical object
+6. __init__ initializes hardware with try/except for friendly errors
+7. Methods named as plain English actions
+8. All methods have docstrings with Args/Returns
+9. Returns real units always (Celsius, percent, lux, etc.)
+10. Friendly error messages via niat._errors
+
+================================================================================
+REFERENCE MODULE: niat/led.py
+================================================================================
+
+"""
+NIAT Kit LED Module
+Controls the onboard NeoPixel LED.
+"""
+
+import board
+import neopixel
+import time
+
+
+# Color name to RGB value mapping
+COLORS = {
+    "red":     (255, 0, 0),
+    "green":   (0, 255, 0),
+    "blue":    (0, 0, 255),
+    "white":   (255, 255, 255),s
+    "yellow":  (255, 255, 0),
+    "orange":  (255, 165, 0),
+    "purple":  (128, 0, 128),
+    "cyan":    (0, 255, 255),
+    "pink":    (255, 105, 180),
+    "off":     (0, 0, 0),
+}
+
+
+class LED:
+    """
+    A class to control the onboard NeoPixel LED.
+    
+    Provides simple methods to turn the LED on/off, change colors,
+    and create blinking patterns.
+    """
+    
+    def __init__(self):
+        """
+        Initialize the LED.
+        
+        The LED starts in the off state.
+        """
+        try:
+            self._pixel = neopixel.NeoPixel(board.NEOPIXEL, 1, brightness=0.3)
+            self._pixel[0] = (0, 0, 0)
+        except Exception:
+            raise RuntimeError(
+                "LED not found. Is the NeoPixel connected?"
+            )
+    
+    def on(self, color="white"):
+        """
+        Turn the LED on with the specified color.
+        
+        Args:
+            color: Color name or RGB tuple (r, g, b)
+        """
+        if isinstance(color, str):
+            rgb = COLORS.get(color.lower(), (255, 255, 255))
+        else:
+            rgb = color
+        self._pixel[0] = rgb
+    
+    def off(self):
+        """
+        Turn the LED off.
+        """
+        self._pixel[0] = (0, 0, 0)
+    
+    def is_on(self):
+        """
+        Check if the LED is currently on.
+        
+        Returns:
+            True if the LED is on, False otherwise
+        """
+        return self._pixel[0] != (0, 0, 0)
+    
+    def blink(self, color="white", speed=0.5, count=3):
+        """
+        Blink the LED a specified number of times.
+        
+        Args:
+            color: Color name or RGB tuple
+            speed: Time in seconds for each on/off cycle
+            count: Number of times to blink
+        """
+        for _ in range(count):
+            self.on(color)
+            time.sleep(speed)
+            self.off()
+            time.sleep(speed)
+
+================================================================================
+REFERENCE MODULE: niat/__init__.py
+================================================================================
+
+"""
+NIAT Kit Library
+================
+A student-friendly Python library for the NIAT ESP32-S3 IoT Kit.
+"""
+
+from niat.led import LED
+from niat.screen import Screen
+
+__version__ = "1.0.0"
+__author__ = "NIAT Team"
+
+__all__ = [
+    "LED",
+    "Screen",
+]
+
+================================================================================
+COMPLETE MODULE LIST (from official BOM sheet):
+================================================================================
+
+Module                      Interface       Voltage     Class Name
+--------------------------------------------------------------------------------
+1.  Main Development Board  UART/I2C/SPI    3.3V/5V     -
+2.  Camera Board Module     SPI/Parallel    3.3V        Camera (future)
+3.  Edge ML Board           I2S/I2C/SPI     3.3V        MLBoard (future)
+4.  8x8 LED Pixel Module    NeoPixel        5V          LEDMatrix (future)
+5.  Basic Development Board GPIO            3.3V/5V     Button, Knob, Melody
+6.  SHT31 Sensor            I2C             3.3V        TempSensor
+7.  VEML6030 Module         I2C             3.3V        LightSensor
+8.  L298N Motor Driver      GPIO/PWM        5V/12V      Motor
+9.  MQ135 Gas Sensor        Analog          5V          GasSensor
+10. I2S MIC Board           I2S             3.3V        MicSensor
+11. Rain Drop Sensor        Analog/Digital  5V          RainSensor
+12. Soil Moisture Sensor    Analog          5V          SoilSensor
+13. Touch Sensor            Digital         3.3V/5V     TouchPad
+14. 2 Channel Relay Module  Digital         5V          Switch
+15. OLED Display            I2C             3.3V        Screen
+
+================================================================================
+IMPLEMENTED MODULES:
+================================================================================
+[x] LED          - niat/led.py      - NeoPixel LED control
+[x] Screen       - niat/screen.py   - OLED display (128x64)
+[ ] TempSensor   - niat/sensors.py  - SHT31 temperature & humidity
+[ ] LightSensor  - niat/sensors.py  - VEML6030 ambient light
+[ ] SoilSensor   - niat/sensors.py  - Soil moisture probe
+[ ] RainSensor   - niat/sensors.py  - Rain detection
+[ ] GasSensor    - niat/sensors.py  - MQ135 air quality
+[ ] Button       - niat/inputs.py   - Push buttons
+[ ] TouchPad     - niat/inputs.py   - Capacitive touch
+[ ] Knob         - niat/inputs.py   - Potentiometer
+[ ] Melody       - niat/sound.py    - Buzzer tones
+[ ] MicSensor    - niat/sound.py    - I2S microphone
+[ ] Motor        - niat/motor.py    - L298N motor driver
+[ ] Switch       - niat/relay.py    - Relay control
+================================================================================

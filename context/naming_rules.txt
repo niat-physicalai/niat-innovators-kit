@@ -1,0 +1,40 @@
+NIAT Kit Firmware — Naming Rules and Conventions
+
+CLASS NAMES:
+- Must be physical objects or roles
+- Good: LED, Screen, Motor, Button, Switch, TempSensor
+- Bad: GPIOController, I2CDevice, PWMOutput
+
+METHOD NAMES:
+- Must be plain English actions or questions
+- Read methods: read_temperature(), read_percent(), read_lux()
+- Action methods: turn_on(), play_note(), show_bar()
+- Boolean methods: is_pressed(), is_raining(), is_loud(), is_on()
+- Bad: digitalWrite(), analogRead(), setPWMDuty()
+
+RETURN VALUES:
+- Always return real world units
+- Temperature in celsius (float)
+- Humidity in percent (float)
+- Moisture in percent 0-100 (int)
+- Light in lux (float)
+- Volume in 0-100 scale (int)
+- Never return raw ADC counts or register values
+
+PARAMETERS:
+- Use named parameters with sensible defaults
+- Good: speed=0.5, color="red", duration=1.0
+- Bad: duty=512, freq=440, reg=0x2C
+
+FORBIDDEN WORDS in student-facing code:
+- GPIO, Pin, I2C, SPI, UART, ADC, PWM, DMA
+- register, bus, baud, prescaler, attenuation
+- raw, buffer, bytes, hex, MSB, LSB, duty
+- Relay (use Switch instead)
+
+ERROR MESSAGES:
+- Must be friendly and helpful
+- Include what went wrong
+- Include how to fix it
+- Example: "SoilSensor not found. Is the module plugged in?"
+- Never show: "OSError: [Errno 19] ENODEV"

@@ -1,0 +1,9 @@
+# CircuitPython libraries required on device
+# Install via CircuitPython Library Bundle
+# https://circuitpython.org/libraries
+
+adafruit-circuitpython-neopixel
+adafruit-circuitpython-ssd1306
+adafruit-circuitpython-sht31d
+adafruit-circuitpython-veml7700
+adafruit-circuitpython-motor

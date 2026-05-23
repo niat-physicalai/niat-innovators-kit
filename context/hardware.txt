@@ -1,0 +1,95 @@
+NIAT Kit Hardware Description
+
+MAIN CONTROLLER:
+- ESP32-S3 Development Board
+- Onboard: OLED display, SD card slot, USB-C, Reset + Boot buttons
+- WiFi + BLE built in
+- CircuitPython firmware
+
+MODULES (plug and play):
+1. Touch Sensor
+   - Capacitive touch pad
+   - Digital output: touched or not touched
+   - Connector: VCC, GND, OUT
+
+2. Capacitive Soil Moisture Sensor
+   - Probe shape, insert into soil
+   - Analog output: 0-3.3V (dry to wet)
+   - Connector: 3.3V, GND, Aout
+
+3. SHT31 Temperature and Humidity Sensor
+   - High accuracy digital sensor
+   - I2C interface
+   - Connector: VCC, GND, SDA, SCL, RST, ALERT
+   - Range: -40 to 125C, 0-100% humidity
+
+4. Rain Drop Sensor
+   - Interdigitated copper traces
+   - LM393 comparator onboard
+   - Analog + Digital output
+   - Connector: 3.5V, GND, DO, AO
+
+5. OLED Display Module
+   - SSD1306 or SSD1315
+   - 128x64 pixels
+   - I2C interface
+   - Connector: 3V3, GND, SDA, SCL
+
+6. MQ-135 Gas Sensor Module
+   - Detects CO2, NH3, NOx, smoke
+   - Analog + Digital output
+   - Potentiometer for threshold
+   - Connector: 5V, GND, AO, DO
+
+7. L298N Motor Driver
+   - Dual H-bridge
+   - Controls 2 DC motors
+   - PWM speed control
+   - Connector: ENA, IN1, IN2, IN3, IN4, ENB
+
+8. WS2812B LED Matrix
+   - 8x8 = 64 individually addressable RGB LEDs (NOT 4x4)
+   - NeoPixel protocol
+   - SPI interface
+   - Operating voltage: 5V
+   - Board size: 45 x 65mm
+
+9. I2S Microphone
+   - MEMS digital microphone
+   - I2S interface
+   - Connector: SEL, WS, DATA, BCLK, GND, 3.3V
+
+10. Camera Board Module
+    - OV2640 camera sensor
+    - 30-pin FFC connector
+    - Onboard microphone
+
+11. Edge ML Board
+   - MPU6050 6-axis IMU (accelerometer + gyroscope) — I2C, address 0x68
+   - SPH0645LM4H-B I2S MEMS Microphone
+   - MAX98357A I2S Audio Amplifier
+   - SD Card slot
+   - Interface: I2S/I2C/SPI
+   - Operating voltage: 3.3V
+
+12. Basic Development Board
+    - 4x LEDs (LED1-LED4)
+    - 2x Push buttons (SW1, SW2)
+    - 1x Buzzer (BUZ)
+    - 1x Potentiometer (POT)
+
+13. 2-Channel Relay Module
+    - 2 independent relays
+    - NO, COM, NC terminals
+    - Connector: I/P1, I/P2, 5V, GND
+
+14. VEML6030 Ambient Light Sensor
+    - High accuracy lux measurement
+    - I2C interface
+    - Connector: VCC, GND, SDA, SCL, INT
+
+15. OLED Display
+    - High contrast display for text and graphics
+    - Interface: I2C or SPI (both supported)
+    - Operating voltage: 3.3V
+    - Board size: 24 x 39mm
