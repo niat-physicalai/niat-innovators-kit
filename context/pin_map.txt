@@ -1,4 +1,4 @@
-NIAT Kit ESP32-S3 Pin Mapp
+NIAT Kit ESP32-S3 Pin Map
 ================================================================================
 
 ONBOARD COMPONENTS:
